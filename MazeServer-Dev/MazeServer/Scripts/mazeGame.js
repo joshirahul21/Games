@@ -4,9 +4,8 @@
     var mazeHub = angular.module("mazeGameSignal");
 
     var gameController = function ($scope) {
-        $scope = enterGameRoomHandler;
 
-        var enterGameRoomHandler = function () {
+        $scope.enterGameRoomHandler = function () {
             var txtName = document.getElementById('txtName').value;
             //var player = { playername: txtName, connectionId: $.connection.hub.id };
             //addPlayerToGameRoom(player);
@@ -16,6 +15,7 @@
             firstPage.className = "firstPage hidden";
             gamePage.className = "row";
         };
+
     };
 
     app.controller("gameController", gameController);
