@@ -1,4 +1,0 @@
-Games
-=====
-
-My Games
