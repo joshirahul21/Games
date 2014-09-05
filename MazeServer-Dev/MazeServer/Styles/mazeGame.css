@@ -1,0 +1,140 @@
+p#error {
+    color: red;
+}
+
+.firstPage {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    display: block;
+    background: white;
+}
+
+.list {
+}
+
+.list-header {
+    margin-left: -15px;
+}
+
+.title-color {
+    color: #12A80C;
+}
+
+.app-title-margin {
+    margin: 25px;
+}
+
+.app-wc-name-margin {
+    margin-top: 32px;
+    margin-bottom: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.background-color {
+    background: #12A80C;
+}
+
+.app-title {
+    color: white;
+    display: inline-block;
+}
+
+.list-item-margin {
+    margin-top: -17px;
+    margin-right: -17px;
+}
+
+.sharp-border {
+    border-radius: 0px;
+}
+
+.button.btn.btn-success.sharp-border {
+    border-radius: 0px;
+}
+
+.bs-callout {
+    padding: 18px;
+    margin: 5px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+}
+
+.bs-callout-danger {
+    border-left-color: #12A80C;
+}
+
+.bs-callout-busy {
+    border-left-color: red;
+}
+
+.availablePlayer {
+    margin-left: 20px;
+    margin-right: 20px;
+    background: greenyellow;
+}
+
+.busyPlayer {
+    margin-left: 20px;
+    margin-right: 20px;
+    background: red;
+}
+
+td.mazeblock {
+    background: black;
+}
+
+table#mage {
+    border: none;
+    border-spacing: 0px;
+}
+
+td {
+    height: 20px;
+    width: 20px;
+}
+
+    td.player1 {
+        background: yellowgreen;
+    }
+
+    td.player2 {
+        background: goldenrod;
+        background-image: url('images/tikigiki_abstract_element-016.png');
+        background-size: cover;
+    }
+
+    td.freeBolck {
+        background: aliceblue;
+    }
+
+    td.selectedBlock {
+        background-image: url('images/BAW-SNAKE-05-R.png');
+        background-size: cover;
+        opacity: 1;
+        -webkit-animation: myfirst 0.8s infinite alternate; /* Chrome, Safari, Opera */
+        animation: myfirst 0.8s infinite alternate;
+    }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+    0% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Standard syntax */
+@keyframes myfirst {
+    0% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

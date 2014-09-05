@@ -1,0 +1,299 @@
+<html>
+<head>
+    <title>Maze Game</title>
+    <link href="Styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="Styles/bootstrap-theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="Styles/mazeGame.css" />
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/hammer.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.1.1.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script src="Scripts/mazeGameSignal.js"></script>
+    <script src="Scripts/mazePlayer.js"></script>
+    <script src="Scripts/mazeGame.js"></script>
+</head>
+<body ng-app="mazeGameApp">
+    <div class="container" ng-controller="gameController">
+        <nav class="navbar navbar-default background-color">
+            <h1 class="app-title app-title-margin">Maze Game</h1>
+            <h3 ng-show="playerName" class="pull-right app-title app-wc-name-margin"><span>Welcome Mr. </span><span id="spName">{{playerName}}</span></h3>
+        </nav>
+        <div id="gamePage" class="row hidden">
+            <div class="col-md-8">
+                <table id="mage" tabindex="0">
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="player1 selectedBlock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="freeBolck"></td>
+                        <td class="player2"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                    <tr>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                        <td class="mazeblock"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4 list">
+                <h1 class="list-header title-color">Game Room</h1>
+                <div id="divGameRoom" class="row"></div>
+            </div>
+        </div>
+        <div class="firstPage" id="firstPage">
+            <h2>Required Informaition</h2>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success active">Mr</button>
+                <button type="button" class="btn btn-success">Ms</button>
+            </div>
+            <input class="form-control" placeholder="Name" type="text" id="txtName" ng-model="playerName" />
+            <button class=" btn btn-primary" id="btnEnterGameRoom" ng-click="enterGameRoomHandler">Enter Game Room</button>
+        </div>
+    </div>
+</body>
+</html>
