@@ -9,6 +9,7 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/jquery.signalR-2.1.1.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <script src="signalr/hubs"></script>
     <script src="Scripts/mazeGameSignal.js"></script>
     <script src="Scripts/mazePlayer.js"></script>
@@ -18,9 +19,9 @@
     <div class="container" ng-controller="gameController">
         <nav class="navbar navbar-default background-color">
             <h1 class="app-title app-title-margin">Maze Game</h1>
-            <h3 ng-show="playerName" class="pull-right app-title app-wc-name-margin"><span>Welcome Mr. </span><span id="spName">{{playerName}}</span></h3>
+            <h3 ng-show="playerNameTitle" class="pull-right app-title app-wc-name-margin"><span>Welcome </span><span id="spName">{{playerNameTitle}}</span></h3>
         </nav>
-        <div id="gamePage" class="row hidden">
+        <div id="gamePage" class="row" ng-show="showGamePage">
             <div class="col-md-8">
                 <table id="mage" tabindex="0">
                     <tr>
@@ -285,11 +286,11 @@
                 <div id="divGameRoom" class="row"></div>
             </div>
         </div>
-        <div class="firstPage" id="firstPage">
+        <div class="firstPage" id="firstPage" ng-hide="showGamePage">
             <h2>Required Informaition</h2>
             <div class="btn-group">
-                <button type="button" class="btn btn-success active">Mr</button>
-                <button type="button" class="btn btn-success">Ms</button>
+                <label ng-model="initial" class="btn btn-success" btn-radio="'Mr'">Mr</label>
+                <label ng-model="initial" class="btn btn-success" btn-radio="'Ms'">Ms</label>
             </div>
             <input class="form-control" placeholder="Name" type="text" id="txtName" ng-model="playerName" />
             <button class=" btn btn-primary" id="btnEnterGameRoom" ng-click="enterGameRoomHandler()">Enter Game Room</button>

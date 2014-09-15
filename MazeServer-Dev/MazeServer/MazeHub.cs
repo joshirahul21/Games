@@ -43,27 +43,20 @@ namespace MazeServer
 
         public void EnterToGameRoom(string playerName)
         {
-            var player = new { playername = playerName, connectionId = this.Context.ConnectionId };
+            var player =
+            new Player()
+            {
+                Name = playerName,
+                ConnectionId = this.Context.ConnectionId
+            };
 
             //Add player to player list.
-            _players.Add(new Player()
-            {
-                Name = player.playername,
-                ConnectionId = player.connectionId
-            });
+            _players.Add(player);
 
-            //Update game room for new player.
-            var players = from p in _players
-                          where p.ConnectionId != this.Context.ConnectionId
-                          select new
-                          {
-                              playername = p.Name,
-                              connectionId = p.ConnectionId
-                          };
-            Clients.Caller.addPlayersToGameRoom(players);
+            Clients.Caller.addPlayersToGameRoom(_players);
 
             //Update other players game room with new player.
-            Clients.Others.addPlayerToGameRoom(player);
+            Clients.Others.addNewPlayerToGameRoom(player);
         }
 
         public void JoinGameRequest(string connectionId)

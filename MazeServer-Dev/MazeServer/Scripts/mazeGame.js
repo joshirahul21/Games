@@ -1,19 +1,31 @@
 (function () {
 
-    var app = angular.module("mazeGameApp", []);
+    var app = angular.module("mazeGameApp", ['ui.bootstrap']);
     var mazeHub = angular.module("mazeGameSignal");
 
     var gameController = function ($scope) {
+        var me;
+        $scope.initial = 'Mr';
+        mazeHub.connectSignalR();
 
         $scope.enterGameRoomHandler = function () {
-            var txtName = document.getElementById('txtName').value;
+            var name = $scope.playerName;//document.getElementById('txtName').value;
+            var initial = $scope.initial;
+            me = new Player();
+            me.name = name;
+            me.initial = initial;
+            mazeHub.enterToGameRoom(me, function (playes) {
+                $scope.playerNameTitle = initial + ". " + name;
+                $scope.showGamePage = true;
+            });
+
             //var player = { playername: txtName, connectionId: $.connection.hub.id };
             //addPlayerToGameRoom(player);
-            mazeHub.server.enterToGameRoom(txtName);
-            var firstPage = document.getElementById('firstPage');
-            var gamePage = document.getElementById('gamePage');
-            firstPage.className = "firstPage hidden";
-            gamePage.className = "row";
+            //mazeHub.server.enterToGameRoom(txtName);
+            //var firstPage = document.getElementById('firstPage');
+            //var gamePage = document.getElementById('gamePage');
+            //firstPage.className = "firstPage hidden";
+            //gamePage.className = "row";
         };
 
     };

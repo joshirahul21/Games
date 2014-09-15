@@ -89,6 +89,7 @@
   <ItemGroup>
     <Content Include="Scripts\mazeGameSignal.js" />
     <Content Include="Scripts\mazePlayer.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.11.0.min.js" />
     <Content Include="Styles\mazeGame.css" />
     <Content Include="mazeGame.html" />
     <Content Include="Scripts\mazeGame.js" />

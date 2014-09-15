@@ -1,37 +1,46 @@
 ﻿(function () {
     $.connection.hub.url = "/signalr";
     var app = angular.module('mazeGameSignal', []);
-
-    var mazeHub;
+    var hub;
+    var nextHandler;
 
     app.connectSignalR = function () {
-        mazeHub = $.connection.mazeHub;
-        mazeHub.client.addPlayerToGameRoom = addPlayerToGameRoom;
-        mazeHub.client.addPlayersToGameRoom = addPlayersToGameRoom;
-        mazeHub.client.removePlayerFromGameRoom = removePlayerFromGameRoom;
-        mazeHub.client.requestToJoinGame = requestToJoinGame;
-        mazeHub.client.serveAlert = serveAlert;
-        mazeHub.client.updatePlayerState = updatePlayerState;
-        mazeHub.client.updatePartnerMove = updatePartnerMove;
-        mazeHub.client.startGame = startGame;
+        hub = $.connection.mazeHub;
+        hub.client.addNewPlayerToGameRoom = addNewPlayerToGameRoom;
+        hub.client.addPlayersToGameRoom = addPlayersToGameRoom;
+        hub.client.removePlayerFromGameRoom = removePlayerFromGameRoom;
+        hub.client.requestToJoinGame = requestToJoinGame;
+        hub.client.serveAlert = serveAlert;
+        hub.client.updatePlayerState = updatePlayerState;
+        hub.client.updatePartnerMove = updatePartnerMove;
+        hub.client.startGame = startGame;
 
         $.connection.hub.start().done(function () {
 
         });
     }
 
-    var addPlayerToGameRoom = function (player) {
-        var divGameRoom = document.getElementById("divGameRoom");
-        var item = createPlayerElement(player);
-        item.setAttribute("id", player.connectionId);
-        divGameRoom.appendChild(item);
+    app.enterToGameRoom = function (player, next) {
+        nextHandler = next;
+        hub.server.enterToGameRoom(player.name);
+    }
+
+    var addNewPlayerToGameRoom = function (player) {
+
+        //var divGameRoom = document.getElementById("divGameRoom");
+        //var item = createPlayerElement(player);
+        //item.setAttribute("id", player.connectionId);
+        //divGameRoom.appendChild(item);
     };
 
     var addPlayersToGameRoom = function (players) {
-        var index;
-        for (index in players) {
-            addPlayerToGameRoom(players[index]);
+        if (nextHandler != null && nextHandler != undefined) {
+            nextHandler(players);
         }
+        //var index;
+        //for (index in players) {
+        //    addPlayerToGameRoom(players[index]);
+        //}
     };
 
     var removePlayerFromGameRoom = function (conId) {
