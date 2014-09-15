@@ -5,28 +5,32 @@
 
     var gameController = function ($scope) {
         var me;
+        var roomPlayers = $scope.roomPlayers = [];
         $scope.initial = 'Mr';
         mazeHub.connectSignalR();
 
         $scope.enterGameRoomHandler = function () {
-            var name = $scope.playerName;//document.getElementById('txtName').value;
+            var name = $scope.playerName;
             var initial = $scope.initial;
             me = new Player();
             me.name = name;
             me.initial = initial;
-            mazeHub.enterToGameRoom(me, function (playes) {
+            mazeHub.enterToGameRoom(me, function (players) {
                 $scope.playerNameTitle = initial + ". " + name;
                 $scope.showGamePage = true;
+                roomPlayers = players;
             });
-
-            //var player = { playername: txtName, connectionId: $.connection.hub.id };
-            //addPlayerToGameRoom(player);
-            //mazeHub.server.enterToGameRoom(txtName);
-            //var firstPage = document.getElementById('firstPage');
-            //var gamePage = document.getElementById('gamePage');
-            //firstPage.className = "firstPage hidden";
-            //gamePage.className = "row";
         };
+
+        mazeHub.updateRoomPlayers(function (player, state) {
+            switch (state) {
+                case "Added":
+                    //$scope.roomPlayers.push(player);
+                    break;
+                default:
+                    break;
+            }
+        });
 
     };
 

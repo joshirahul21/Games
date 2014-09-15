@@ -25,8 +25,14 @@
         hub.server.enterToGameRoom(player.name);
     }
 
-    var addNewPlayerToGameRoom = function (player) {
+    app.updateRoomPlayers = function (next) {
+        nextHandler = next;
+    };
 
+    var addNewPlayerToGameRoom = function (player) {
+        if (nextHandler && nextHandler != null) {
+            nextHandler(player,"Added");
+        }
         //var divGameRoom = document.getElementById("divGameRoom");
         //var item = createPlayerElement(player);
         //item.setAttribute("id", player.connectionId);
@@ -34,7 +40,7 @@
     };
 
     var addPlayersToGameRoom = function (players) {
-        if (nextHandler != null && nextHandler != undefined) {
+        if (nextHandler && nextHandler != null) {
             nextHandler(players);
         }
         //var index;

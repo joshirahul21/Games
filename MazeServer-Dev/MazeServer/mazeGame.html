@@ -283,7 +283,12 @@
             </div>
             <div class="col-md-4 list">
                 <h1 class="list-header title-color">Game Room</h1>
-                <div id="divGameRoom" class="row"></div>
+                <div id="divGameRoom" class="row" ng-repeat="player in roomPlayers">
+                    <div class="bs-callout bs-callout-danger">
+                        <div class="pull-left list-item-margin">{{player.Name}}</div>
+                        <button class="pull-right list-item-margin">Join</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="firstPage" id="firstPage" ng-hide="showGamePage">
